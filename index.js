@@ -22,10 +22,6 @@ cv.style.boxShadow = '0px 0px 16px 1.5px grey'
 x
 enableHighLight = true
 -
-打个招呼先
-+
-alert('Hi!')
--
 好的, 继续来写简历吧
 首先, 把简历分几个栏
 +
@@ -45,8 +41,31 @@ main.style.flex = '2.5'
 const info = document.querySelector('.info')
 info.style.flex = '1'
 info.style.backgroundColor = '#95B8D1'
-`
+-
+右边的栏用来写一些个人信息
 
+...
+
+先确定一下布局
++
+const info = document.querySelector('.info')
+info.style.display = 'flex'
+info.style.flexDirection = 'column'
+info.style.alignItems= 'center'
+
+-
+加个头像
++
+const avatar = document.createElement('img')
+avatar.src = '佐仓千代avatar.png'
+avatar.style.width = '80%'
+avatar.style.borderRadius = '100%'
+avatar.style.border = '4px solid white'
+document.querySelector('.info').appendChild(avatar)
+-
+添加一下个人信息
+
+`
 
 
 function marks(string, ...regexs) {
@@ -166,6 +185,7 @@ function type(el, string, interval, cb) {
 }
 
 async function trigger() {
+  let play = false
   let enableHighLight = false
   let timer
   const interval = 40
@@ -193,8 +213,11 @@ async function trigger() {
         el = el.children[0]
       }
 
-      
-      await write(el, subsAndCodes[index].data)
+      if(play) {
+        await write(el, subsAndCodes[index].data)
+      } else {
+        el.innerHTML += subsAndCodes[index].data
+      }
     }
     //整块执行
     if (/\n\+|x\n/.test(subsAndCodes[index].mark)) {
