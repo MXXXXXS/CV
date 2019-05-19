@@ -1,0 +1,21 @@
+* {
+  margin: 0;
+  transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+}
+
+.coding, .present {
+  width: 50vw;
+}
+
+.present {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
