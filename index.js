@@ -21,9 +21,33 @@ cv.style.boxShadow = '0px 0px 16px 1.5px grey'
 嗯, 代码看着有点单调, 来点语法高亮
 x
 enableHighLight = true
+-
+打个招呼先
 +
 alert('Hi!')
+-
+好的, 继续来写简历吧
+首先, 把简历分几个栏
++
+const cv = document.querySelector('.cv')
+const main = document.createElement('div')
+main.setAttribute('class', 'main')
+const info = document.createElement('div')
+info.setAttribute('class', 'info')
+cv.appendChild(main)
+cv.appendChild(info)
+cv.style.display = 'flex'
+-
+乍看没什么效果, 不慌, 加点样式
++
+const main = document.querySelector('.main')
+main.style.flex = '2.5'
+const info = document.querySelector('.info')
+info.style.flex = '1'
+info.style.backgroundColor = '#95B8D1'
 `
+
+
 
 function marks(string, ...regexs) {
   function genRegexFromString(string) {
@@ -143,14 +167,10 @@ function type(el, string, interval, cb) {
 
 async function trigger() {
   let enableHighLight = false
-  const interval = 20
+  let timer
+  const interval = 40
   const coding = document.getElementsByClassName(`coding`)[0]
   const write = partial(type, undefined, undefined, interval, (el, word) => {
-    if (enableHighLight) {
-      document.querySelectorAll('pre code').forEach((block) => {
-        hljs.highlightBlock(block);
-      });
-    }
     el.innerHTML += word
   })
 
@@ -173,14 +193,22 @@ async function trigger() {
         el = el.children[0]
       }
 
+      
       await write(el, subsAndCodes[index].data)
     }
     //整块执行
     if (/\n\+|x\n/.test(subsAndCodes[index].mark)) {
       eval(subsAndCodes[index].data)
     }
+    clearTimeout(timer)
+    if (enableHighLight) {
+      timer = setInterval(() => {
+        document.querySelectorAll('pre code').forEach((block) => {
+          hljs.highlightBlock(block);
+        });
+      }, 500)
+    }
   }
-
 }
 
 trigger()
