@@ -3,7 +3,7 @@
   transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-body {
+.codingAndPresent {
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -13,9 +13,29 @@ body {
   width: 50vw;
 }
 
+.coding {
+  overflow:auto;
+}
+
 .present {
   display: flex;
   justify-content: center;
   align-items: center;
   
+}
+
+.skipPlaying {
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  outline: none;
+  color: rgb(52, 80, 105);
+  background-color: rgba(146, 253, 218, 0.3);
+  border: 2px solid #95B8D1;
+  border-radius: 10px;
+  height: 40px;
+}
+
+.skipPlaying:hover {
+    cursor: pointer;
 }
