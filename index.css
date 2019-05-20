@@ -14,14 +14,26 @@
 }
 
 .coding {
-  overflow:auto;
+  overflow-x: auto;
+}
+
+.cv {
+  width: 45vw;
+  height: 95vh;
+}
+
+.main {
+  overflow-x: auto;
+}
+
+.avatar {
+  border: 4px solid white;
 }
 
 .present {
   display: flex;
   justify-content: center;
   align-items: center;
-  
 }
 
 .skipPlaying {
@@ -37,5 +49,22 @@
 }
 
 .skipPlaying:hover {
-    cursor: pointer;
+  cursor: pointer;
+}
+
+@media (max-width: 1200px) and (orientation: portrait) {
+  .codingAndPresent {
+    flex-direction: column-reverse;
+  }
+  .coding, .present {
+    width: 100vw;
+    height: 50vh;
+  }
+  .cv {
+    width: 95vw;
+    height: 45vh;
+  }
+  .avatar {
+  border: 0.8vw solid white;
+}
 }

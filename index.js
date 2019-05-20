@@ -16,8 +16,8 @@ document.querySelector('.coding').innerHTML = document.querySelector('.coding').
 const cv = document.createElement('div')
 cv.setAttribute('class', 'cv')
 document.getElementsByClassName('present')[0].appendChild(cv)
-cv.style.width = '45vw'
-cv.style.height = '95vh'
+// cv.style.width = '45vw'
+// cv.style.height = '95vh'
 cv.style.boxShadow = '0px 0px 16px 1.5px grey'
 -
 嗯, 代码看着有点单调, 来点语法高亮
@@ -45,6 +45,7 @@ main.style.flex = '2.5'
 const info = document.querySelector('.info')
 info.style.flex = '1'
 info.style.backgroundColor = '#95B8D1'
+info.style.overflowY= 'auto'
 -
 右边的栏用来写一些个人信息
 -
@@ -60,10 +61,10 @@ info.style.alignItems= 'center'
 加个头像
 +
 const avatar = document.createElement('img')
+avatar.setAttribute('class', 'avatar')
 avatar.src = '佐仓千代avatar.png'
 avatar.style.width = '80%'
 avatar.style.borderRadius = '100%'
-avatar.style.border = '4px solid white'
 document.querySelector('.info').appendChild(avatar)
 -
 添加一下个人信息
@@ -74,18 +75,19 @@ aboutMe.setAttribute('class', 'aboutMe')
 info.appendChild(aboutMe)
 const items = {
   姓名: 'xxx',
-  毕业于: 'xxx',
-  电话: 'xxx',
-  邮箱: 'xxx',
-  GitHub: 'xxx',
-  我的小站: 'xxx'
+  毕业于: 'xxxxxxx',
+  电话: 'xxxxxxxxxxx',
+  邮箱: 'xxxxxxxxxxx@xxxx.xxx',
+  GitHub: 'https://github.com/xxxxxxxxx',
+  我的小站: 'https://xxxxxxxxxx.xxxxxx'
 }
 for (const key in items) {
   if (items.hasOwnProperty(key)) {
     const val = items[key];
     const item = document.createElement('p')
-    item.style.margin = '15px 0'
-    item.innerText = key + ':' + val
+    item.style.margin = '1vh 0'
+    item.style.wordBreak = 'break-word'
+    item.innerText = key + ': ' + val
     aboutMe.appendChild(item)
   }
 }
@@ -112,7 +114,7 @@ for (const key in items) {
     const h1 = document.createElement('h1')
     h1.innerText = key
     h1.setAttribute('class', key)
-    h1.style.borderBottom = '2px solid #95B8D1'
+    h1.style.borderBottom = '0.5vh solid #95B8D1'
     item.appendChild(h1)
   }
 }
@@ -306,15 +308,18 @@ async function trigger() {
   let play = true
   let enableHighLight = false
   let interval = 100
-  //语法高亮
+  let highlightInterval = 800
+  //检测是否移动端, 以降低高亮频率, 否则实测代码输出非常缓慢. 此处设置  1.5s也有缓慢现象, 尚可接受
+  if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+    highlightInterval = 1500
+   }
+  //语法高亮, 每次只处理最后一个代码块, 为了性能考虑
   let timer0 = setInterval(() => {
     if (enableHighLight) {
-      document.querySelectorAll('pre code').forEach((block) => {
-        hljs.highlightBlock(block);
-        
-      });
+      const codeToHighlight = document.querySelectorAll('pre code')
+      hljs.highlightBlock(codeToHighlight[codeToHighlight.length - 1])
     }
-  }, 800)
+  }, highlightInterval)
   //自动滚动到最底部
   let timer1 = setInterval(() => {
     const coding = document.querySelector(`.coding`);
@@ -326,8 +331,8 @@ async function trigger() {
     el.innerHTML += word
   })
   //跳过播放按钮功能
-  document.querySelector(`.skipPlaying`).addEventListener(`click`, function(e) {
-    if(e.target.tagName === `BUTTON`) {
+  document.querySelector(`.skipPlaying`).addEventListener(`click`, function (e) {
+    if (e.target.tagName === `BUTTON`) {
       e.target.style.opacity = '0'
       play = false
     }
@@ -365,12 +370,16 @@ async function trigger() {
       eval(subsAndCodes[index].data)
     }
   }
+  //动画被跳过后进行一次全部的高亮处理
+  document.querySelectorAll('pre code').forEach((block) => {
+    hljs.highlightBlock(block);
+  })
   //结束后清楚所有定时器
   const lastTimer = setTimeout(() => {
     clearInterval(timer0)
     clearInterval(timer1)
     clearTimeout(lastTimer)
-  }, 3000)
+  }, 1000)
 }
 
 trigger()
