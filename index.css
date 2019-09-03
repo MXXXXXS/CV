@@ -8,7 +8,7 @@ p.text {
 }
 
 .aboutMe p {
-  border-bottom: white 2px solid;
+  border-bottom: white 2px dotted;
   color: white;
   line-height: 1.5;
   margin: 15px

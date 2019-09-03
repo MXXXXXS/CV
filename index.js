@@ -75,10 +75,10 @@ aboutMe.setAttribute('class', 'aboutMe')
 info.appendChild(aboutMe)
 const items = {
   姓名: '向思齐',
-  学校: '南京工业大学',
   电话: '15195812388',
   邮箱: 'relife_abyss@qq.com',
-  GitHub: 'https://github.com/MXXXXXS'
+  GitHub: 'https://github.com/MXXXXXS',
+  期望职位: '前端工程师'
 }
 for (const key in items) {
   if (items.hasOwnProperty(key)) {
@@ -174,10 +174,7 @@ const skills = {
   使用的打包工具: 'webpack',
   使用过的后端框架: 'express',
   使用过的可视化工具: 'D3',
-  使用过的数据库: 'mongoDB',
-  了解过但还没用的测试框架: 'mocha',
-  了解过但还没用的断言库: 'chai',
-  了解过但还没用的并觉得非常有必要的: 'TS'
+  使用过的数据库: 'mongoDB'
 }
 
 render('.stackContainer', skills)
@@ -266,10 +263,11 @@ async function render(rootELSelector, items) {
 }
 
 const content = {
-  关于我的专业: '自动化专业',
-  为什么选了做前端而不是本专业方向的职业: '有趣, 擅长',
-  怎么学习的: '看技术书, 查w3c, whatwg, csswg, mdn, devdoc, 搜google, 翻stackOverflow, 逛medium, 掘金, 与大佬们的blog...',
-  自我技能评价: '从大一寒假入坑前端, 至今已近 3 年, js基础比较扎实, html 和 css 都是用到才查, 不想成为框架熟练工(毕竟要用时学也是很快的), 偏向于用原生技术构建(导致旧浏览器兼容性受限)'
+  学历: '南京工业大学, 本科',
+  专业: '自动化',
+  英语水平: 'CET-6',
+  技能概述: '入坑前端已近 3 年, js 比较扎实, 英文阅读流畅, 注重基础',
+  怎么学习的: '看技术书, 查w3c, whatwg, csswg, mdn, devdoc, 搜google, 翻stackOverflow, 逛medium, 掘金, 与大佬们的blog...'
 }
 
 render('.experience', content)
@@ -295,9 +293,9 @@ async function render(rootELSelector, items) {
 }
 
 const content = {
-  喜欢的体育运动: '羽毛球, 自认为打得不是很差, 因为力量不足只能靠技巧',
-  日常任务: '看技术书, 看漫画, 看动画, 欣赏第九艺术, 听歌',
-  特质: '对感兴趣的东西会深入地钻研, 比如自学入门了基础的神经网络理论并实现了一个demo'
+  体育运动: '羽毛球, 骑自行车',
+  日常: '看技术书, 看漫画, 看动画, 欣赏第九艺术, 听歌',
+  特质: '对感兴趣的东西会深入地钻研'
 }
 
 render('.content', content)
