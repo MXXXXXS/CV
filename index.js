@@ -31,7 +31,7 @@ enableHighLight = true
 const cv = document.querySelector('.cv')
 const main = document.createElement('div')
 main.setAttribute('class', 'main')
-main.style.padding = '10px'
+main.style.padding = '20px'
 const info = document.createElement('div')
 info.setAttribute('class', 'info')
 cv.appendChild(main)
@@ -62,7 +62,7 @@ info.style.alignItems= 'center'
 +
 const avatar = document.createElement('img')
 avatar.setAttribute('class', 'avatar')
-avatar.src = '佐仓千代avatar.png'
+avatar.src = '简历头像.jpg'
 avatar.style.width = '80%'
 avatar.style.borderRadius = '100%'
 document.querySelector('.info').appendChild(avatar)
@@ -74,20 +74,28 @@ const aboutMe = document.createElement('div')
 aboutMe.setAttribute('class', 'aboutMe')
 info.appendChild(aboutMe)
 const items = {
-  姓名: 'xxx',
-  毕业于: 'xxxxxxx',
-  电话: 'xxxxxxxxxxx',
-  邮箱: 'xxxxxxxxxxx@xxxx.xxx',
-  GitHub: 'https://github.com/xxxxxxxxx',
-  我的小站: 'https://xxxxxxxxxx.xxxxxx'
+  姓名: '向思齐',
+  学校: '南京工业大学',
+  电话: '15195812388',
+  邮箱: 'relife_abyss@qq.com',
+  GitHub: 'https://github.com/MXXXXXS'
 }
 for (const key in items) {
   if (items.hasOwnProperty(key)) {
     const val = items[key];
     const item = document.createElement('p')
-    item.style.margin = '1vh 0'
     item.style.wordBreak = 'break-word'
-    item.innerText = key + ': ' + val
+    // https://stackoverflow.com/questions/3809401/what-is-a-good-regular-expression-to-match-a-url
+    const urlRegex = /https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)/
+    if (urlRegex.test(val)) {
+      item.innerText = key + ': '
+      const a = document.createElement('a')
+      a.href = val
+      a.innerText = val
+      item.appendChild(a)
+    } else {
+      item.innerText = key + ': ' + val
+    }
     aboutMe.appendChild(item)
   }
 }
@@ -99,8 +107,8 @@ for (const key in items) {
 const items = {
   技术栈: 'techStack',
   项目经历: 'projects',
-  教育背景: 'education',
-  个人喜好: 'hobbies'
+  教育经历: 'education',
+  个人爱好: 'hobbies'
 }
 
 for (const key in items) {
@@ -111,11 +119,11 @@ for (const key in items) {
     div.setAttribute('class', val)
     main.appendChild(div)
     const item = document.querySelector('.' + val)
-    const h1 = document.createElement('h1')
-    h1.innerText = key
-    h1.setAttribute('class', key)
-    h1.style.borderBottom = '0.5vh solid #95B8D1'
-    item.appendChild(h1)
+    const h3 = document.createElement('h3')
+    h3.innerText = key
+    h3.setAttribute('class', key)
+    h3.style.borderBottom = '4px solid #95B8D1'
+    item.appendChild(h3)
   }
 }
 -
@@ -127,64 +135,177 @@ const stackContainer = document.createElement('div')
 stackContainer.setAttribute('class', 'stackContainer')
 stackContainer.style.columns = '14rem'
 techStack.appendChild(stackContainer)
+//"教育经历"添加container
+const education = document.querySelector('.education')
+const experience = document.createElement('div')
+experience.setAttribute('class', 'experience')
+education.appendChild(experience)
+//"个人爱好"添加container
+const hobbies = document.querySelector('.hobbies')
+const content = document.createElement('div')
+content.setAttribute('class', 'content')
+hobbies.appendChild(content)
+
 +
-function type(el, string, interval, cb) {
-  if (string) {
-    let index = 0
-    return new Promise((res, rej) => {
-      const timer = setInterval(() => {
-        cb(el, string[index])
-        if (index === string.length - 1) {
-          clearInterval(timer)
-          res(true)
-        }
-        index++
-      }, interval)
-    })
+async function render(rootELSelector, items) {
+  const rootEl = document.querySelector(rootELSelector)
+  for (const key in items) {
+    if (items.hasOwnProperty(key)) {
+      const string = items[key];
+      if (play) {
+        rootEl.innerText += key + ':  '
+        await type(rootEl, string, 100, (rootEl, word) => {
+          rootEl.innerText += word
+        })
+      } else {
+        rootEl.innerText += key + ': ' + string
+      }
+      rootEl.innerHTML += '<br>'
+    }
   }
 }
 
 const skills = {
-  语言: 'HTML(5), CSS(3), es6+, TS, node',
-  前端框架: 'vue及其生态',
-  后端框架: 'express',
-  打包工具: 'webpack',
-  可视化: 'D3',
-  视图: 'pug',
-  数据库: 'mongoDB',
-  代码质量: 'ESLint',
-  测试框架: 'mocha',
-  断言库: 'chai',
-  代码风格: '低耦合, 风格约束',
-  接口风格: '遵循RESTful'
+  偏好的代码风格: '防御性编程, 低耦合, 高内聚',
+  偏好的接口风格: 'RESTful',
+  用来保持代码质量的: 'ESLint',
+  日常使用的语言: 'ES6+, node',
+  熟悉的前端框架: 'vue及其生态',
+  使用的打包工具: 'webpack',
+  使用过的后端框架: 'express',
+  使用过的可视化工具: 'D3',
+  使用过的数据库: 'mongoDB',
+  了解过但还没用的测试框架: 'mocha',
+  了解过但还没用的断言库: 'chai',
+  了解过但还没用的并觉得非常有必要的: 'TS'
 }
 
-document.querySelectorAll('.stackContainer').forEach(async el => {
-  for (const key in skills) {
-    if (skills.hasOwnProperty(key)) {
-      const string = skills[key];
-      if (play) {
-        el.innerText += key + ': '
-        await type(el, string, 100, (el, word) => {
-          el.innerText += word
-        })
-      } else {
-        el.innerText += key + ': ' + string
-      }
-      el.innerHTML += '<br>'
-    }
+render('.stackContainer', skills)
+-
+展示一下做过什么项目是让他人了解的最好方式
++
+const projectsEl = document.querySelector('.projects')
+const projects = [
+  {
+    项目: 'aqua-player',
+    描述: '仿 win10 groove 音乐播放器, 使用 electron 构建',
+    特点: [
+      '没有使用框架, 通过 web components 技术实现了组件化和作用域分离 css',
+      '借助 Proxy 实现了状态与视图的同步',
+      '实现了列表渲染, 代理了数组的方法实现了元素变化同步视图',
+      '父子组件通过响应式属性, 自定义事件通讯',
+      '简单的路由, 显示隐藏模式或条件渲染模式',
+      'indexedDB 用于数据存储, web audio api 用于音频播放',
+      '大量使用 css 变量穿透 shadow dom 配置组件样式'
+    ],
+    link: 'https://github.com/MXXXXXS/aqua-player'
+  },
+  {
+    项目: 'my-blog',
+    描述: '从零手工构建的一个简单博客系统',
+    特点: [
+      '使用了 vue 及其生态构建前端页面',
+      '使用了 express 作为后端框架',
+      '实现了带离线存储功能(indexedDB)的图片文字编辑与上传的简单 Markdown 编辑器',
+      '实现了一个颜色选择组件, 有 rgb 和 hsl 两种模式, 用于自定义博客页面的主题色',
+      '粗糙的评论系统, 支持二级评论, 自定义图片表情(canvas 处理图片缩放), 后端用 mongoDB 存储',
+      '使用 fetch 与服务器交互获取文章'
+    ],
+    link: 'https://github.com/MXXXXXS/my-blog'
+  },
+  {
+    项目: 'number-recognize',
+    描述: '玩具性质, 手动实现了简易的神经网络, 并在 web 端识别手写数字',
+    特点: [
+      '没有使用库, 基于 mnist 数据集的手写数字识别神经网络, 纯手工编写, 读书笔记',
+      '神经网络层数与层神经元数量可配置',
+      'canvas 配合 click, touch 事件实现了绘画, 移动端适配',
+      '响应式, canvas 内容不会因为视口大小变化而丢失',
+      '激活函数: ReLU, 求偏导方式: 反向传播, 损失函数: SoftmaxWithLoss'
+    ],
+    link: 'https://github.com/MXXXXXS/learningDL'
   }
+]
+projects.forEach(project => {
+  const container = document.createElement('div')
+  const a = document.createElement('a')
+  a.innerText = project.项目
+  a.href = project.link
+  container.appendChild(a)
+  const p = document.createElement('p')
+  p.innerText = project.描述
+  container.appendChild(p)
+  const ul = document.createElement('ul')
+  project.特点.forEach(item => {
+    const li = document.createElement('li')
+    li.innerText = item
+    ul.appendChild(li)
+  })
+  container.appendChild(ul)
+  projectsEl.appendChild(container)
 })
 -
-展示一下做过什么项目是表现自己技能的最好方式
+我是怎么学习的, 在大学里干了什么, 这些放在"教育经历"里
 +
-//有待填坑
+async function render(rootELSelector, items) {
+  const rootEl = document.querySelector(rootELSelector)
+  for (const key in items) {
+    if (items.hasOwnProperty(key)) {
+      const string = items[key];
+      if (play) {
+        rootEl.innerText += key + ':  '
+        await type(rootEl, string, 100, (rootEl, word) => {
+          rootEl.innerText += word
+        })
+      } else {
+        rootEl.innerText += key + ':  ' + string
+      }
+      rootEl.innerHTML += '<br>'
+    }
+  }
+}
+
+const content = {
+  关于我的专业: '自动化专业',
+  为什么选了做前端而不是本专业方向的职业: '有趣, 擅长',
+  怎么学习的: '看技术书, 查w3c, whatwg, csswg, mdn, devdoc, 搜google, 翻stackOverflow, 逛medium, 掘金, 与大佬们的blog...',
+  自我技能评价: '从大一寒假入坑前端, 至今已近 3 年, js基础比较扎实, html 和 css 都是用到才查, 不想成为框架熟练工(毕竟要用时学也是很快的), 偏向于用原生技术构建(导致旧浏览器兼容性受限)'
+}
+
+render('.experience', content)
+-
+不写代码的时候一般在干什么呢?
++
+async function render(rootELSelector, items) {
+  const rootEl = document.querySelector(rootELSelector)
+  for (const key in items) {
+    if (items.hasOwnProperty(key)) {
+      const string = items[key];
+      if (play) {
+        rootEl.innerText += key + ':  '
+        await type(rootEl, string, 100, (rootEl, word) => {
+          rootEl.innerText += word
+        })
+      } else {
+        rootEl.innerText += key + ':  ' + string
+      }
+      rootEl.innerHTML += '<br>'
+    }
+  }
+}
+
+const content = {
+  喜欢的体育运动: '羽毛球, 自认为打得不是很差, 因为力量不足只能靠技巧',
+  日常任务: '看技术书, 看漫画, 看动画, 欣赏第九艺术, 听歌',
+  特质: '对感兴趣的东西会深入地钻研, 比如自学入门了基础的神经网络理论并实现了一个demo'
+}
+
+render('.content', content)
 x
 //结束后隐藏跳过按钮
 document.querySelector('.skipPlaying').style.opacity = '0'
+document.querySelector('.coding').style.flex = '0'
 `
-
-
 
 
 function marks(string, ...regexs) {
@@ -310,9 +431,9 @@ async function trigger() {
   let interval = 100
   let highlightInterval = 800
   //检测是否移动端, 以降低高亮频率, 否则实测代码输出非常缓慢. 此处设置  1.5s也有缓慢现象, 尚可接受
-  if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
     highlightInterval = 1500
-   }
+  }
   //语法高亮, 每次只处理最后一个代码块, 为了性能考虑
   let timer0 = setInterval(() => {
     if (enableHighLight) {
