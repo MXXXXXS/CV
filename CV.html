@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+    }
+    
+    * {
+      font-size: 12px;
+      margin: 0;
+      transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    p.text {
+      line-height: 1.5;
+    }
+
+    .aboutMe p {
+      border-bottom: white 2px dotted;
+      color: white;
+      line-height: 1.5;
+      margin: 15px
+    }
+
+    .stackContainer {
+      line-height: 1.5;
+    }
+
+    .codingAndPresent {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      overflow-y: auto;
+    }
+
+    .coding,
+    .present {
+      flex: 1;
+    }
+
+    .coding {
+      overflow-x: auto;
+    }
+
+    .cv {
+      margin: 20px;
+      width: 750px;
+      height: 920px;
+    }
+
+    .main {
+      overflow-x: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .main>div {
+      flex: 1;
+    }
+
+    .main>div>div {
+      padding: 10px 0;
+    }
+
+    .main a {
+      color: rgb(149, 184, 209);
+      font-size: 16px;
+      text-decoration: none;
+    }
+
+    .main p {
+      font-style: italic;
+      color: grey;
+    }
+
+    .present {
+      font-size: 12px;
+    }
+
+    .info a {
+      color: white;
+    }
+
+    .avatar {
+      border: 3px solid white;
+      margin: 20px 0;
+    }
+
+    .present {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .skipPlaying {
+      position: fixed;
+      bottom: 50px;
+      right: 50px;
+      outline: none;
+      color: rgb(52, 80, 105);
+      background-color: rgba(146, 253, 218, 0.3);
+      border: 2px solid #95B8D1;
+      border-radius: 10px;
+      height: 40px;
+    }
+
+    .skipPlaying:hover {
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="cv" style="box-shadow: grey 0px 0px 16px 1.5px; display: flex;">
+    <div class="main" style="padding: 20px; flex: 2.5 1 0%;">
+      <div class="techStack">
+        <h3 class="技术栈" style="border-bottom: 4px solid rgb(149, 184, 209);">技术栈</h3>
+        <div class="stackContainer" style="columns: 14rem auto;">偏好的代码风格: 防御性编程, 低耦合, 高内聚<br>偏好的接口风格:
+          RESTful<br>用来保持代码质量的: ESLint<br>日常使用的语言: ES6+, node<br>熟悉的前端框架: vue及其生态<br>使用的打包工具: webpack<br>使用过的后端框架:
+          express<br>使用过的可视化工具: D3<br>使用过的数据库: mongoDB<br></div>
+      </div>
+      <div class="projects">
+        <h3 class="项目经历" style="border-bottom: 4px solid rgb(149, 184, 209);">项目经历</h3>
+        <div><a href="https://github.com/MXXXXXS/aqua-player">aqua-player</a>
+          <p>仿 win10 groove 音乐播放器, 使用 electron 构建</p>
+          <ul>
+            <li>没有使用框架, 通过 web components 技术实现了组件化和作用域分离 css</li>
+            <li>借助 Proxy 实现了状态与视图的同步</li>
+            <li>实现了列表渲染, 代理了数组的方法实现了元素变化同步视图</li>
+            <li>父子组件通过响应式属性, 自定义事件通讯</li>
+            <li>简单的路由, 显示隐藏模式或条件渲染模式</li>
+            <li>indexedDB 用于数据存储, web audio api 用于音频播放</li>
+            <li>大量使用 css 变量穿透 shadow dom 配置组件样式</li>
+          </ul>
+        </div>
+        <div><a href="https://github.com/MXXXXXS/my-blog">my-blog</a>
+          <p>从零手工构建的一个简单博客系统</p>
+          <ul>
+            <li>使用了 vue 及其生态构建前端页面</li>
+            <li>使用了 express 作为后端框架</li>
+            <li>实现了带离线存储功能(indexedDB)的图片文字编辑与上传的简单 Markdown 编辑器</li>
+            <li>实现了一个颜色选择组件, 有 rgb 和 hsl 两种模式, 用于自定义博客页面的主题色</li>
+            <li>粗糙的评论系统, 支持二级评论, 自定义图片表情(canvas 处理图片缩放), 后端用 mongoDB 存储</li>
+            <li>使用 fetch 与服务器交互获取文章</li>
+          </ul>
+        </div>
+        <div><a href="https://github.com/MXXXXXS/learningDL">number-recognize</a>
+          <p>玩具性质, 手动实现了简易的神经网络, 并在 web 端识别手写数字</p>
+          <ul>
+            <li>没有使用库, 基于 mnist 数据集的手写数字识别神经网络, 纯手工编写, 读书笔记</li>
+            <li>神经网络层数与层神经元数量可配置</li>
+            <li>canvas 配合 click, touch 事件实现了绘画, 移动端适配</li>
+            <li>响应式, canvas 内容不会因为视口大小变化而丢失</li>
+            <li>激活函数: ReLU, 求偏导方式: 反向传播, 损失函数: SoftmaxWithLoss</li>
+          </ul>
+        </div>
+      </div>
+      <div class="education">
+        <h3 class="教育经历" style="border-bottom: 4px solid rgb(149, 184, 209);">教育经历</h3>
+        <div class="experience">学历: 南京工业大学, 本科<br>专业: 自动化<br>英语水平: CET-6<br>技能概述: 入坑前端已近 3 年, js 比较扎实, 英文阅读流畅,
+          注重基础<br>怎么学习的: 看技术书, 查w3c, whatwg, csswg, mdn, devdoc, 搜google, 翻stackOverflow, 逛medium, 掘金, 与大佬们的blog...<br>
+        </div>
+      </div>
+      <div class="hobbies">
+        <h3 class="个人爱好" style="border-bottom: 4px solid rgb(149, 184, 209);">个人爱好</h3>
+        <div class="content">体育运动: 羽毛球, 骑自行车<br>日常: 看技术书, 看漫画, 看动画, 欣赏第九艺术, 听歌<br>特质: 对感兴趣的东西会深入地钻研<br></div>
+      </div>
+    </div>
+    <div class="info"
+      style="flex: 1 1 0%; background-color: rgb(149, 184, 209); overflow-y: auto; display: flex; flex-direction: column; align-items: center;">
+      <img class="avatar" src="https://suger.aqua.coffee/CV/%E7%AE%80%E5%8E%86%E5%A4%B4%E5%83%8F.jpg" style="width: 80%; border-radius: 100%;">
+      <div class="aboutMe">
+        <p style="word-break: break-word;">姓名: 向思齐</p>
+        <p style="word-break: break-word;">电话: 15195812388</p>
+        <p style="word-break: break-word;">邮箱: relife_abyss@qq.com</p>
+        <p style="word-break: break-word;">GitHub: <a href="https://github.com/MXXXXXS">https://github.com/MXXXXXS</a>
+        </p>
+        <p style="word-break: break-word;">期望职位: 前端工程师</p>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
