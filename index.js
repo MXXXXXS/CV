@@ -168,13 +168,12 @@ async function render(rootELSelector, items) {
 const skills = {
   偏好的代码风格: '防御性编程, 低耦合, 高内聚',
   偏好的接口风格: 'RESTful',
-  用来保持代码质量的: 'ESLint',
   日常使用的语言: 'ES6+, node',
   熟悉的前端框架: 'vue及其生态',
   使用的打包工具: 'webpack',
-  使用过的后端框架: 'express',
-  使用过的可视化工具: 'D3',
-  使用过的数据库: 'mongoDB'
+  接触过的后端框架: 'express',
+  接触过的可视化工具: 'D3',
+  接触过的数据库: 'mongoDB'
 }
 
 render('.stackContainer', skills)
@@ -187,13 +186,12 @@ const projects = [
     项目: 'aqua-player',
     描述: '仿 win10 groove 音乐播放器, 使用 electron 构建',
     特点: [
-      '没有使用框架, 通过 web components 技术实现了组件化和作用域分离 css',
-      '借助 Proxy 实现了状态与视图的同步',
-      '实现了列表渲染, 代理了数组的方法实现了元素变化同步视图',
-      '父子组件通过响应式属性, 自定义事件通讯',
-      '简单的路由, 显示隐藏模式或条件渲染模式',
-      'indexedDB 用于数据存储, web audio api 用于音频播放',
-      '大量使用 css 变量穿透 shadow dom 配置组件样式'
+      '尝试不借助框架, 通过 web components 实现组件化和 css 作用域分离',
+      '可配置的配置组件样式, 使用 css 变量穿透 shadow dom',
+      '使用 Proxy 实现状态与视图的同步',
+      '代理了数组的方法, 实现了响应式列表渲染, 元素变化触发视图变化',
+      '组件间通过响应式属性, 自定义事件通讯',
+      '使用 indexedDB 存储数据, web audio api 播放音频'
     ],
     link: 'https://github.com/MXXXXXS/aqua-player'
   },
@@ -201,26 +199,23 @@ const projects = [
     项目: 'my-blog',
     描述: '从零手工构建的一个简单博客系统',
     特点: [
-      '使用了 vue 及其生态构建前端页面',
-      '使用了 express 作为后端框架',
-      '实现了带离线存储功能(indexedDB)的图片文字编辑与上传的简单 Markdown 编辑器',
-      '实现了一个颜色选择组件, 有 rgb 和 hsl 两种模式, 用于自定义博客页面的主题色',
-      '粗糙的评论系统, 支持二级评论, 自定义图片表情(canvas 处理图片缩放), 后端用 mongoDB 存储',
+      '使用 vue 及其生态构建前端页面, express 作为后端框架, mongoDB 存储数据',
+      '简单的 Markdown 编辑器, 用于图片文字编辑与上传, 具有离线保存功能',
+      '一个颜色选择组件, 有 rgb 和 hsl 两种模式, 用于自定义博客页面的主题色',
+      '评论组件, 支持自定义图片表情(canvas 处理图片缩放)',
       '使用 fetch 与服务器交互获取文章'
     ],
     link: 'https://github.com/MXXXXXS/my-blog'
   },
   {
-    项目: 'number-recognize',
-    描述: '玩具性质, 手动实现了简易的神经网络, 并在 web 端识别手写数字',
+    项目: 'classify-my-files',
+    描述: '照片整理工具',
     特点: [
-      '没有使用库, 基于 mnist 数据集的手写数字识别神经网络, 纯手工编写, 读书笔记',
-      '神经网络层数与层神经元数量可配置',
-      'canvas 配合 click, touch 事件实现了绘画, 移动端适配',
-      '响应式, canvas 内容不会因为视口大小变化而丢失',
-      '激活函数: ReLU, 求偏导方式: 反向传播, 损失函数: SoftmaxWithLoss'
+      '整理的三种模式: copy, link, symlink',
+      '分析 exif信息, 文件的 mtime, 文件名三者得出照片的实际日期',
+      '使用 chai 和 mocha 单元测试, travis 持续集成与自动发布到 npm',
     ],
-    link: 'https://github.com/MXXXXXS/learningDL'
+    link: 'https://github.com/MXXXXXS/classify-my-files'
   }
 ]
 projects.forEach(project => {
