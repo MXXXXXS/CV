@@ -132,34 +132,30 @@
         <div><a href="https://github.com/MXXXXXS/aqua-player">aqua-player</a>
           <p>仿 win10 groove 音乐播放器, 使用 electron 构建</p>
           <ul>
-            <li>没有使用框架, 通过 web components 技术实现了组件化和作用域分离 css</li>
-            <li>借助 Proxy 实现了状态与视图的同步</li>
-            <li>实现了列表渲染, 代理了数组的方法实现了元素变化同步视图</li>
-            <li>父子组件通过响应式属性, 自定义事件通讯</li>
-            <li>简单的路由, 显示隐藏模式或条件渲染模式</li>
-            <li>indexedDB 用于数据存储, web audio api 用于音频播放</li>
-            <li>大量使用 css 变量穿透 shadow dom 配置组件样式</li>
+            <li>尝试不借助框架, 通过 web components 实现组件化和 css 作用域分离</li>
+            <li>可配置的配置组件样式, 使用 css 变量穿透 shadow dom</li>
+            <li>使用 Proxy 实现状态与视图的同步</li>
+            <li>代理了数组的方法, 实现了响应式列表渲染, 元素变化触发视图变化</li>
+            <li>组件间通过响应式属性, 自定义事件通讯</li>
+            <li>使用 indexedDB 存储数据, web audio api 播放音频</li>
           </ul>
         </div>
         <div><a href="https://github.com/MXXXXXS/my-blog">my-blog</a>
           <p>从零手工构建的一个简单博客系统</p>
           <ul>
-            <li>使用了 vue 及其生态构建前端页面</li>
-            <li>使用了 express 作为后端框架</li>
-            <li>实现了带离线存储功能(indexedDB)的图片文字编辑与上传的简单 Markdown 编辑器</li>
-            <li>实现了一个颜色选择组件, 有 rgb 和 hsl 两种模式, 用于自定义博客页面的主题色</li>
-            <li>粗糙的评论系统, 支持二级评论, 自定义图片表情(canvas 处理图片缩放), 后端用 mongoDB 存储</li>
+            <li>使用 vue 及其生态构建前端页面, express 作为后端框架, mongoDB 存储数据</li>
+            <li>简单的 Markdown 编辑器, 用于图片文字编辑与上传, 具有离线保存功能</li>
+            <li>一个颜色选择组件, 有 rgb 和 hsl 两种模式, 用于自定义博客页面的主题色</li>
+            <li>评论组件, 支持自定义图片表情(canvas 处理图片缩放)</li>
             <li>使用 fetch 与服务器交互获取文章</li>
           </ul>
         </div>
-        <div><a href="https://github.com/MXXXXXS/learningDL">number-recognize</a>
-          <p>玩具性质, 手动实现了简易的神经网络, 并在 web 端识别手写数字</p>
+        <div><a href="https://github.com/MXXXXXS/classify-my-files">number-recognize</a>
+          <p>照片整理工具</p>
           <ul>
-            <li>没有使用库, 基于 mnist 数据集的手写数字识别神经网络, 纯手工编写, 读书笔记</li>
-            <li>神经网络层数与层神经元数量可配置</li>
-            <li>canvas 配合 click, touch 事件实现了绘画, 移动端适配</li>
-            <li>响应式, canvas 内容不会因为视口大小变化而丢失</li>
-            <li>激活函数: ReLU, 求偏导方式: 反向传播, 损失函数: SoftmaxWithLoss</li>
+            <li>整理的三种模式: copy, link, symlink</li>
+            <li>分析 exif信息, 文件的 mtime, 文件名三者得出照片的实际日期</li>
+            <li>使用 chai 和 mocha 单元测试, travis 持续集成与自动发布到 npm</li>
           </ul>
         </div>
       </div>
