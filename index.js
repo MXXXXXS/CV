@@ -166,14 +166,10 @@ async function render(rootELSelector, items) {
 }
 
 const skills = {
-  偏好的代码风格: '防御性编程, 低耦合, 高内聚',
-  偏好的接口风格: 'RESTful',
-  日常使用的语言: 'ES6+, node',
-  熟悉的前端框架: 'vue及其生态',
-  使用的打包工具: 'webpack',
-  接触过的后端框架: 'express',
-  接触过的可视化工具: 'D3',
-  接触过的数据库: 'mongoDB'
+  代码风格: '防御性编程',
+  接口风格: 'RESTful',
+  语言: 'ES6+, node',
+  前端框架: 'vue及其生态',
 }
 
 render('.stackContainer', skills)
